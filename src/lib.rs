@@ -1,3 +1,5 @@
+extern crate js_sys;
+
 mod utils;
 
 use cfg_if::cfg_if;
@@ -81,11 +83,17 @@ impl Universe {
 
         let cells = (0..width * height)
             .map(|i| {
-                if i % 2 == 0 || i % 7 == 0 {
+                if js_sys::Math::random() < 0.5 {
                     Cell::Alive
                 } else {
                     Cell::Dead
                 }
+
+                // if i % 2 == 0 || i % 7 == 0 {
+                //     Cell::Alive
+                // } else {
+                //     Cell::Dead
+                // }
             })
             .collect();
 
